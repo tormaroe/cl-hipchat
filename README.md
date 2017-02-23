@@ -34,10 +34,9 @@ In this example we retrieve the list of all available rooms and echo the most re
 (let ((hipchat.config:*AUTH-TOKEN* "HUIr76trDERT6dhwnweifu78GHFhmmi"))
   (let* ((lucky-room (car (hipchat:get-all-rooms)))
          (room-id (hipchat:room-id lucky-room))
-         (latest-message (car (hipchat:recent-room-history room-id :max 1)))
-         (message-text (hipchat:message-text latest-message)))
+         (latest-message (car (hipchat:recent-room-history room-id :max 1))))
     (hipchat:send-notification room-id 
-                               message-text 
+                               (hipchat:message-text latest-message) 
                                :from "Echo bot" 
                                :color :random)))
 ``` 
