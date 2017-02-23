@@ -74,13 +74,13 @@ Delete a room. <br>
 Set a room's topic. <br>
 [HipChat API detials..](https://www.hipchat.com/docs/apiv2/method/set_topic)
 
-## User functions
+### User functions
 
 **get-user (name)**
 
 **get-all-users (&key (start 0) (max 100) include-guests include-deleted)**
 
-## Send functions
+### Send functions
 
 **send-notification (room-id-or-name message &key (from "") (color :yellow) notify (message-format :html))**<br>
 [HipChat API detials..](https://www.hipchat.com/docs/apiv2/method/send_room_notification)
@@ -97,13 +97,10 @@ Set a room's topic. <br>
 **share-link-with-room (room-id-or-name link &optional (message ""))**<br>
 [HipChat API detials..](https://www.hipchat.com/docs/apiv2/method/share_link_with_room)
 
-## Read functions
+### Read functions
 
 **room-history (room &key (date "recent") (timezone "UTC") (start 0) (max 100) (reverse t))**<br>
 [HipChat API detials..](https://www.hipchat.com/docs/apiv2/method/view_room_history)
 
 **recent-room-history (room &key not-before (timezone "UTC") (max 100) (include-deleted t))**<br>
 [HipChat API detials..](https://www.hipchat.com/docs/apiv2/method/view_recent_room_history)
-
-
-*Work in progress...*
