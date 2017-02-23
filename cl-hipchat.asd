@@ -1,7 +1,7 @@
 ;;;; cl-hipchat.asd
 
 (asdf:defsystem #:cl-hipchat
-  :description "Describe cl-hipchat here"
+  :description "Client wrapper library for the HipChat API"
   :author "Torbjørn Marø"
   :license "MIT License"
   :depends-on (#:drakma #:cl-json)

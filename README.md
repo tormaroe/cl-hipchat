@@ -55,19 +55,24 @@ Some exceptional situations may signal an error condition.
 ### Room functions
 
 **get-room (room-id-or-name)**<br>
-Gets the details for a room. [HipChat API detials..](https://www.hipchat.com/docs/apiv2/method/get_room)
+Gets the details for a room. <br>
+[HipChat API detials..](https://www.hipchat.com/docs/apiv2/method/get_room)
 
 **get-all-rooms (&key (start 0) (max 100) (include-private t) include-archived)**<br>
-Get all rooms, optionally including private and archived rooms. Results are paged, and `max` returned rooms per request should be between 0 and 1000 (defaults to 100). [HipChat API detials..](https://www.hipchat.com/docs/apiv2/method/get_all_rooms)
+Get all rooms, optionally including private and archived rooms. Results are paged, and `max` returned rooms per request should be between 0 and 1000 (defaults to 100). <br>
+[HipChat API detials..](https://www.hipchat.com/docs/apiv2/method/get_all_rooms)
 
 **create-room (name &key guest-access owner-user-id (privacy :public) (topic ""))**<br>
-Creates a new room. Only the `name` parameter (length between 1 and 50) is required. [HipChat API detials..](https://www.hipchat.com/docs/apiv2/method/create_room)
+Creates a new room. Only the `name` parameter (length between 1 and 50) is required. <br>
+[HipChat API detials..](https://www.hipchat.com/docs/apiv2/method/create_room)
 
 **delete-room (room-id-or-name)**<br>
-Delete a room. [HipChat API detials..](https://www.hipchat.com/docs/apiv2/method/delete_room)
+Delete a room. <br>
+[HipChat API detials..](https://www.hipchat.com/docs/apiv2/method/delete_room)
 
 **set-topic (room-id-or-name topic)**<br>
-Set a room's topic. [HipChat API detials..](https://www.hipchat.com/docs/apiv2/method/set_topic)
+Set a room's topic. <br>
+[HipChat API detials..](https://www.hipchat.com/docs/apiv2/method/set_topic)
 
 ## User functions
 
