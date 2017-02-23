@@ -1,5 +1,7 @@
 **cl-hipchat** is a HipChat API wrapper client library for Common Lisp.
 
+State: Usable but not complete. Breaking changes may occur.
+
 ## Initialization
 
 You will not found cl-hipchat in QuickLisp yet, but it you clone this repo into your QuickLisp local-projects folder it does not matter. Load it like this:
@@ -40,4 +42,6 @@ Some exceptional situations may signal an error condition.
 Gets the details for a room. [HipChat API detials..](https://www.hipchat.com/docs/apiv2/method/get_room)
 
 **get-all-rooms (&key (start 0) (max 100) (include-private t) include-archived)**<br>
-Get all room, optionally including private and archived rooms. Results are paged, and `max` returned rooms per request should be between 0 and 1000 (defaults to 100). [HipChat API detials..](https://www.hipchat.com/docs/apiv2/method/get_all_rooms)
+Get all rooms, optionally including private and archived rooms. Results are paged, and `max` returned rooms per request should be between 0 and 1000 (defaults to 100). [HipChat API detials..](https://www.hipchat.com/docs/apiv2/method/get_all_rooms)
+
+*Work in progress...*
