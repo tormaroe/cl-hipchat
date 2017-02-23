@@ -51,7 +51,8 @@
 ;;; Gets information about the requested user
 ;;; Auth required with scope 'view_group'.
 ;;; https://www.hipchat.com/docs/apiv2/method/view_user
-(defun get-user (name))
+(defun get-user (name)
+  (make-hipchat-request :GET (format nil "user/~A" name)))
 
 (defun get-all-users (&key (start 0) (max 100) include-guests include-deleted))
 
