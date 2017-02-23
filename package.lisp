@@ -1,11 +1,13 @@
 ;;;; package.lisp
 
 (defpackage #:cl-hipchat.config
+  (:nicknames #:hipchat.config)
   (:use #:cl)
   (:export #:*API-BASE-URL*
            #:*AUTH-TOKEN*))
 
 (defpackage #:cl-hipchat.util
+  (:nicknames #:hipchat.util)
   (:use #:cl #:cl-hipchat.config)
   (:export #:make-hipchat-request
            #:append-query-params
@@ -14,6 +16,7 @@
            #:keyword-to-lowercase-string))
 
 (defpackage #:cl-hipchat
+  (:nicknames #:hipchat)
   (:use #:cl #:cl-hipchat.util)
   (:export 
            ;; Room API
@@ -38,4 +41,7 @@
            #:share-file-with-room
            #:share-link-with-room
 
+           ;; Model helper macros
+           #:room-id
+           #:message-text
            ))
