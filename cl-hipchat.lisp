@@ -5,11 +5,8 @@
 ;;; --- MODEL HELPERS -------------------------------------------------------------
 ;;; -------------------------------------------------------------------------------
 
-(defmacro room-id (alist)
-  `(cdr (assoc :id ,alist)))
-
-(defmacro message-text (alist)
-  `(cdr (assoc :message ,alist)))
+(defmacro room-id      (alist) `(cdr (assoc :id ,alist)))
+(defmacro message-text (alist) `(cdr (assoc :message ,alist)))
 
 ;;; -------------------------------------------------------------------------------
 ;;; --- PUBLIC API ----------------------------------------------------------------
