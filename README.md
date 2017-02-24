@@ -1,4 +1,4 @@
-**cl-hipchat** is a HipChat API wrapper client library for Common Lisp.
+**cl-hipchat** is a HipChat API wrapper client library for Common Lisp. With it you may manage HipChat rooms, read the chat history, send messages publicly and privately, share files, and so on. 
 
 State: Usable but not complete. Breaking changes may occur.
 
@@ -31,14 +31,14 @@ Once you have obtained a token, you may set it globaly like this:
 In this example we retrieve the list of all available rooms and echo the most recent message in one of them.
 
 ```
-(let ((hipchat.config:*AUTH-TOKEN* "HUIr76trDERT6dhwnweifu78GHFhmmi"))
-  (let* ((lucky-room (car (hipchat:get-all-rooms)))
-         (room-id (hipchat:room-id lucky-room))
-         (latest-message (car (hipchat:recent-room-history room-id :max 1))))
-    (hipchat:send-notification room-id 
-                               (hipchat:message-text latest-message) 
-                               :from "Echo bot" 
-                               :color :random)))
+(let* ((lucky-room (car (hipchat:get-all-rooms)))
+       (room-id (hipchat:room-id lucky-room))
+       (latest-message (car (hipchat:recent-room-history room-id 
+                                                         :max 1))))
+  (hipchat:send-notification room-id 
+                             (hipchat:message-text latest-message) 
+                             :from "Echo bot" 
+                             :color :random))
 ``` 
 Notice that `hipchat` exists as a nickname (alias) for `cl-hipchat`.
 
