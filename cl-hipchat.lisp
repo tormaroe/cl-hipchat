@@ -83,13 +83,14 @@
 (defun room-history (room &key (date "recent") (timezone "UTC") (start 0) (max 100) (reverse t)))
 
 (defun recent-room-history (room &key not-before (timezone "UTC") (max 100) (include-deleted t))
-  ; TODO: Add not-before if specified...
   (let ((result (make-hipchat-request :GET
                   (append-query-params 
                     (format nil "room/~A/history/latest" room) 
                     `(("timezone" . ,timezone)
                       ("max-results" . ,max)
-                      ("include_deleted" . ,(bool include-deleted)))))))
+                      ("include_deleted" . ,(bool include-deleted))
+                      ,(when not-before
+                        '("not-before" . not-before)))))))
     (when result
       (cdr (assoc :items result)))))
 
