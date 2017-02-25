@@ -13,8 +13,7 @@
 ;;; -------------------------------------------------------------------------------
 
 (defun get-room (room-id-or-name)
-  ;; TODO: Url-encode room-id-or-name ?!
-  (make-hipchat-request :GET (format nil "room/~A" room-id-or-name)))
+  (make-hipchat-request :GET (room-resource room-id-or-name)))
 
 (defun get-all-rooms (&key (start 0) (max 100) (include-private t) include-archived)
   (let ((result (make-hipchat-request :GET
@@ -38,12 +37,12 @@
 
 
 (defun delete-room (room-id-or-name)
-  (make-hipchat-request :DELETE (format nil "room/~A" room-id-or-name)))
+  (make-hipchat-request :DELETE (room-resource room-id-or-name)))
 
 (defun set-topic (room-id-or-name topic)
   (assert (in-range-p (length topic) 0 250) (topic))
   (make-hipchat-request :PUT 
-    (format nil "room/~A/topic" room-id-or-name)
+    (format nil "~A/topic" (room-resource room-id-or-name))
     `(("topic" . ,topic))))
 
 (defun get-user (name)
@@ -54,7 +53,7 @@
 (defun send-notification (room-id-or-name message &key (from "") (color :yellow) notify (message-format :html))
   ; TODO: Add optional Card
   (make-hipchat-request :POST
-    (format nil "room/~A/notification" room-id-or-name)
+    (format nil "~A/notification" (room-resource room-id-or-name))
     `(("message" . ,message)
       ("message_format" . ,(keyword-to-lowercase-string message-format))
       ("from" . ,from)
@@ -63,7 +62,7 @@
 
 (defun send-message (room-id-or-name message)
   (make-hipchat-request :POST
-    (format nil "room/~A/message" room-id-or-name)
+    (format nil "~A/message" (room-resource room-id-or-name))
     `(("message" . ,message))))
 
 ;;; user: The id, email address, or mention name (beginning with an '@') of the user to send a message to.
@@ -75,17 +74,17 @@
 
 (defun share-link-with-room (room-id-or-name link &optional (message ""))
   (make-hipchat-request :POST
-    (format nil "room/~A/share/link" room-id-or-name)
+    (format nil "~A/share/link" (room-resource room-id-or-name))
     `(("message" . ,message)
       ("link" . ,link))))
 
 
 (defun room-history (room &key (date "recent") (timezone "UTC") (start 0) (max 100) (reverse t)))
 
-(defun recent-room-history (room &key not-before (timezone "UTC") (max 100) (include-deleted t))
+(defun recent-room-history (room-id-or-name &key not-before (timezone "UTC") (max 100) (include-deleted t))
   (let ((result (make-hipchat-request :GET
                   (append-query-params 
-                    (format nil "room/~A/history/latest" room) 
+                    (format nil "~A/history/latest" (room-resource room-id-or-name)) 
                     `(("timezone" . ,timezone)
                       ("max-results" . ,max)
                       ("include_deleted" . ,(bool include-deleted))

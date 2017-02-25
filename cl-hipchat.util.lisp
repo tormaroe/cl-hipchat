@@ -45,6 +45,13 @@
 (defun get-resource-url (resource)
   (format nil "~A~A" *API-BASE-URL* resource))
 
+(defun room-resource (room-id-or-name)
+  (format nil "room/~A" 
+              (if (stringp room-id-or-name)
+                (urlencode room-id-or-name)
+                room-id-or-name)))
+
+
 (defun decode-json-stream (stream)
   (with-input-from-string 
       (s (flexi-streams:octets-to-string stream)) 

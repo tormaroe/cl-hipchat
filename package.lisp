@@ -8,9 +8,10 @@
 
 (defpackage #:cl-hipchat.util
   (:nicknames #:hipchat.util)
-  (:use #:cl #:cl-hipchat.config)
+  (:use #:cl #:do-urlencode #:cl-hipchat.config)
   (:export #:make-hipchat-request
            #:in-range-p
+           #:room-resource
            #:append-query-params
            #:json-bool
            #:bool
