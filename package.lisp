@@ -10,6 +10,7 @@
   (:nicknames #:hipchat.util)
   (:use #:cl #:cl-hipchat.config)
   (:export #:make-hipchat-request
+           #:in-range-p
            #:append-query-params
            #:json-bool
            #:bool

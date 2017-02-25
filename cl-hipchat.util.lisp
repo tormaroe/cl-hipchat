@@ -4,6 +4,10 @@
 ;;; --- PRIVATE UTILITIES ---------------------------------------------------------
 ;;; -------------------------------------------------------------------------------
 
+(defun in-range-p (n min max)
+  (and (>= n min)
+       (<= n max)))
+
 (defun keyword-to-lowercase-string (k)
   (string-downcase (format nil "~A" k)))
 

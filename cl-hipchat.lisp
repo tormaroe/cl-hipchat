@@ -26,7 +26,8 @@
       (cdr (assoc :items result)))))
 
 (defun create-room (name &key guest-access owner-user-id (privacy :public) (topic ""))
-  ; TODO: assert valid privacy value
+  (assert (in-range-p (length name) 1 50) (name))
+  (assert (member privacy '(:public :private)) (privacy))
   (make-hipchat-request :POST "room" `(("name" . ,name)
                                        ("privacy" . ,(keyword-to-lowercase-string privacy))
                                        ("topic" . ,topic)
