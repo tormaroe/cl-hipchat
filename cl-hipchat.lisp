@@ -27,6 +27,7 @@
 
 (defun create-room (name &key guest-access owner-user-id (privacy :public) (topic ""))
   (assert (in-range-p (length name) 1 50) (name))
+  (assert (in-range-p (length topic) 0 250) (topic))
   (assert (member privacy '(:public :private)) (privacy))
   (make-hipchat-request :POST "room" `(("name" . ,name)
                                        ("privacy" . ,(keyword-to-lowercase-string privacy))
@@ -40,7 +41,7 @@
   (make-hipchat-request :DELETE (format nil "room/~A" room-id-or-name)))
 
 (defun set-topic (room-id-or-name topic)
-  ; TODO: max length 250
+  (assert (in-range-p (length topic) 0 250) (topic))
   (make-hipchat-request :PUT 
     (format nil "room/~A/topic" room-id-or-name)
     `(("topic" . ,topic))))
