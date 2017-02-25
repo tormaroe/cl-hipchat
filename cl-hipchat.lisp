@@ -27,11 +27,12 @@
 
 (defun create-room (name &key guest-access owner-user-id (privacy :public) (topic ""))
   ; TODO: assert valid privacy value
-  ; TODO: Add owner-user-id if has value
   (make-hipchat-request :POST "room" `(("name" . ,name)
                                        ("privacy" . ,(keyword-to-lowercase-string privacy))
                                        ("topic" . ,topic)
-                                       ("guest_access" . ,(json-bool guest-access)))))
+                                       ("guest_access" . ,(json-bool guest-access))
+                                       ,(when owner-user-id
+                                          '("owner_user_id" . owner-user-id)))))
 
 
 (defun delete-room (room-id-or-name)

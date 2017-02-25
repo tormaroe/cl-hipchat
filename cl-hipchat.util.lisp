@@ -51,7 +51,9 @@
     (multiple-value-bind (body status-code)
         (drakma:http-request (get-resource-url resource)
                              :method method
-                             :content (when body (json:encode-json-to-string body))
+                             :content (when body 
+                                        (json:encode-json-to-string 
+                                          (remove-if #'null body)))
                              :content-type "application/json"
                              :additional-headers (list auth-header))
       (cond
