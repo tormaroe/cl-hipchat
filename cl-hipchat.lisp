@@ -76,9 +76,11 @@
 ;;; user: The id, email address, or mention name (beginning with an '@') of the user to send a message to.
 ;;; message: The message body. Valid length range: 1 - 10000.
 ;;; notify: Whether this message should trigger a user notification (change the tab color, play a sound, notify mobile phones, etc). Each recipient's notification preferences are taken into account.
-(defun send-private-message (user message &key notify (message-format :text)))
+(defun send-private-message (user message &key notify (message-format :text))
+  (error "Not yet implemented!"))
 
-(defun share-file-with-room (room filepath &optional message))
+(defun share-file-with-room (room filepath &optional message)
+  (error "Not yet implemented!"))
 
 (defun share-link-with-room (room-id-or-name link &optional (message ""))
   (make-hipchat-request :POST
@@ -87,7 +89,8 @@
       ("link" . ,link))))
 
 
-(defun room-history (room &key (date "recent") (timezone "UTC") (start 0) (max 100) (reverse t)))
+(defun room-history (room &key (date "recent") (timezone "UTC") (start 0) (max 100) (reverse t))
+  (error "Not yet implemented!"))
 
 (defun recent-room-history (room-id-or-name &key not-before (timezone "UTC") (max 100) (include-deleted t))
   (let ((result (make-hipchat-request :GET
