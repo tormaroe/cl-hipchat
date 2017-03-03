@@ -48,7 +48,15 @@
 (defun get-user (name)
   (make-hipchat-request :GET (format nil "user/~A" name)))
 
-(defun get-all-users (&key (start 0) (max 100) include-guests include-deleted))
+(defun get-all-users (&key (start 0) (max 100) include-guests include-deleted)
+  (assert (in-range-p max 0 1000) (max))
+  (let ((result (make-hipchat-request :GET
+                  (append-query-params "user" `(("start-index" . ,start)
+                                                ("max-results" . ,max)
+                                                ("include-guests" . ,(bool include-guests)) 
+                                                ("include-deleted" . ,(bool include-deleted)))))))
+    (when result
+      (cdr (assoc :items result)))))
 
 (defun send-notification (room-id-or-name message &key (from "") (color :yellow) notify (message-format :html))
   ; TODO: Add optional Card

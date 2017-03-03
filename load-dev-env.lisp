@@ -21,3 +21,4 @@
 (let ((u (hipchat:get-user (slurp "~/.cl-hipchat-dev-user"))))
   (when u
     (print-user u)))
+
