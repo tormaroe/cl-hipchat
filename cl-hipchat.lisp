@@ -77,7 +77,11 @@
 ;;; message: The message body. Valid length range: 1 - 10000.
 ;;; notify: Whether this message should trigger a user notification (change the tab color, play a sound, notify mobile phones, etc). Each recipient's notification preferences are taken into account.
 (defun send-private-message (user message &key notify (message-format :text))
-  (error "Not yet implemented!"))
+  (make-hipchat-request :POST
+    (format nil "user/~A/message" user)
+    `(("message" . ,message)
+      ("message_format" . ,(keyword-to-lowercase-string message-format))
+      ("notify" . ,(json-bool notify)))))
 
 (defun share-file-with-room (room filepath &optional message)
   (error "Not yet implemented!"))
