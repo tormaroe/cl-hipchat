@@ -1,0 +1,78 @@
+#!/bin/sh
+#|-*- mode:lisp -*-|#
+#| cl-hipchat CLI tool
+exec ros -Q -- $0 "$@"
+|#
+(progn ;;init forms
+  (ros:ensure-asdf)
+  #+quicklisp (ql:quickload '(:cl-hipchat) :silent t)
+  )
+
+(defpackage :ros.script.hipchat.3698817597
+  (:use :cl))
+(in-package :ros.script.hipchat.3698817597)
+
+;; TODO: Command to get or set hipchat user:    hipchat config user <id>
+;; TODO: Command to get or set hipchat token:   hipchat config token <token>
+;; TODO: Command to create room
+;; TODO: Command to delete room
+;; TODO: Command to set room topic
+;; TODO: Command to send quick message to room: 
+;; TODO: Command to send a file to a room
+
+(defvar *usage* "
+Commands:
+  hipchat config user           Get the configured user
+  hipchat config user USER      Set the configured user to USER
+  hipchat config token          Get the configured user token
+  hipchat config token TOKEN    Set the configured user token to TOKEN
+  hipchat room create NAME      Create a room
+  hipchat room delete NAME      Delete a room
+  hipchat room topic TOPIC      Set room topic
+  hipchat send ROOM MESSAGE     Send MESSAGE to ROOM
+
+NB: Quote any arguments containing spaces.
+  ")
+
+;(setf drakma:*header-stream* *standard-output*)
+
+(defun slurp (path)
+  (with-open-file (stream path) 
+    (let ((data (make-string (file-length stream)))) 
+      (read-sequence data stream) 
+      data)))
+
+(defun to-keyword (x)
+  (intern x "KEYWORD"))
+
+(defun room-command (argv)
+  (if argv
+    (let (($1 (to-keyword (car argv))))
+      (case $1
+        (:|create| (format t "Create room: ~A~%" (hipchat:create-room (cadr argv))))
+        (:|delete| (format t "Delete room: ~A~%" (hipchat:delete-room (cadr argv))))
+        (:|topic|  (format t "Room topic set result: ~A~%" (hipchat:set-topic (cadr argv) (caddr argv))))
+        (otherwise (format t "Unknown room command ~A~%" $1))))
+    (format t "MISSING ROOM ARGUMENT!~%~A" *usage*)))
+
+(defun send-command (argv)
+  (if argv
+    (let (($1 (to-keyword (car argv))))
+      (case $1
+        (otherwise (format t "Send message: ~A~%" (hipchat:send-message (car argv) (cadr argv))))))
+    (format t "MISSING SEND ARGUMENT!~%~A" *usage*)))
+
+(defun main (&rest argv)
+  (if argv
+    (let (($1 (to-keyword (car argv))))
+      (setf hipchat.config:*AUTH-TOKEN* (slurp "~/.cl-hipchat-dev-token"))
+      (case $1
+        (:|config| (format t "Config command"))
+        (:|room|   (room-command (cdr argv)))
+        (:|send|   (send-command (cdr argv)))
+        (otherwise (format t "Unknown command ~A~%" $1))))
+    (format t *usage*)))
+
+
+
+;;; vim: set ft=lisp lisp:
