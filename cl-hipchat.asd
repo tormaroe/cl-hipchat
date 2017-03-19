@@ -6,8 +6,8 @@
   :license "MIT License"
   :depends-on (#:drakma #:cl-json #:do-urlencode)
   :serial t
-  :components ((:file "package")
-               (:file "cl-hipchat.config")
-               (:file "cl-hipchat.util")
-               (:file "cl-hipchat")))
+  :components ((:file "src/package")
+               (:file "src/cl-hipchat.config")
+               (:file "src/cl-hipchat.util")
+               (:file "src/cl-hipchat")))
 
