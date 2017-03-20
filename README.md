@@ -1,5 +1,7 @@
 **cl-hipchat** is a HipChat API wrapper client library for Common Lisp. With it you may manage HipChat rooms, read the chat history, send messages publicly and privately, share files, and so on. 
 
+[![Build Status](https://travis-ci.org/tormaroe/cl-hipchat.svg?branch=master)](https://travis-ci.org/tormaroe/cl-hipchat)
+
 State: Usable but not complete. Breaking changes may occur!
 
 ## Getting started
